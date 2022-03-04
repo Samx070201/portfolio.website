@@ -1,4 +1,7 @@
-module.exports = {
+import type { GatsbyConfig } from "gatsby"
+import path from "path"
+
+const config: GatsbyConfig = {
   siteMetadata: {
     title: `Samuele Musazzi's portfolio`,
     description: `Samuele Musazzi's CV.`,
@@ -8,13 +11,13 @@ module.exports = {
   plugins: [
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-image`,
-    // {
-    //   resolve: `gatsby-source-filesystem`,
-    //   options: {
-    //     name: `images`,
-    //     path: `${__dirname}\\src\\images`,
-    //   },
-    // },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `images`,
+        path: path.resolve('src/images'),
+      },
+    },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
@@ -45,3 +48,5 @@ module.exports = {
   ],
   jsxRuntime: "automatic",
 }
+
+export default config

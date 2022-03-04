@@ -5,7 +5,7 @@ interface HeaderProps {
   siteTitle: string
 }
 
-const Header = ({ siteTitle }: HeaderProps) => (
+const Header = ({ siteTitle = '' }: HeaderProps) => (
   <header
     style={{
       background: `rebeccapurple`,
@@ -33,13 +33,5 @@ const Header = ({ siteTitle }: HeaderProps) => (
     </div>
   </header>
 )
-
-Header.propTypes = {
-  siteTitle: PropTypes.string,
-}
-
-Header.defaultProps = {
-  siteTitle: ``,
-}
 
 export default Header

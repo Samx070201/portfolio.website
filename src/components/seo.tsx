@@ -1,12 +1,6 @@
 import { Helmet } from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
 
-interface Meta {
-  content: any
-  property: string
-  name?: undefined
-}
-
 interface SeoProps {
   description?: string
   lang?: string
