@@ -1,15 +1,16 @@
-import { useStaticQuery, graphql } from "gatsby"
-
-import Header from "./header"
-
-import "./layout.css"
+import { graphql, useStaticQuery } from "gatsby"
+import { CSSProperties } from "react"
+import { useIsScrollable } from "../hooks"
+import Footer from "./Footer"
+import ScrollBar from "./ScrollBar"
 
 interface LayoutProps {
+  style?: CSSProperties;
   children: React.ReactNode
 }
 
-const Layout = ({ children }: LayoutProps) => {
-  const data = useStaticQuery(graphql`
+const Layout = ({ style, children }: LayoutProps) => {
+  const { site } = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
         siteMetadata {
@@ -19,27 +20,17 @@ const Layout = ({ children }: LayoutProps) => {
     }
   `)
 
+  const isScrollable = useIsScrollable()
+
   return (
     <>
-      <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
-      <div
-        style={{
-          margin: `0 auto`,
-          maxWidth: 960,
-          padding: `0 1.0875rem 1.45rem`,
-        }}
-      >
-        <main>{children}</main>
-        <footer
-          style={{
-            marginTop: `2rem`,
-          }}
-        >
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.com">Gatsby</a>
-        </footer>
-      </div>
+      {/* <aside>
+        <Navbar />
+      </aside> */}
+      <main style={style}>{children}</main>
+      <Footer />
+
+      {isScrollable && <ScrollBar />}
     </>
   )
 }

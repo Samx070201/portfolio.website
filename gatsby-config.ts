@@ -4,7 +4,7 @@ import path from "path"
 const config: GatsbyConfig = {
   siteMetadata: {
     title: `Samuele Musazzi's portfolio`,
-    description: `Samuele Musazzi's CV.`,
+    description: `Samuele Musazzi's portfolio website.`,
     author: `@samuelemusazzi`,
     // siteUrl: `https://gatsbystarterdefaultsource.gatsbyjs.io/`,
   },
@@ -32,14 +32,6 @@ const config: GatsbyConfig = {
         // theme_color: `#663399`,
         display: `minimal-ui`,
         icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
-      },
-    },
-    {
-      resolve: `gatsby-plugin-typescript`,
-      options: {
-        isTSX: true, // defaults to false
-        jsxPragma: `jsx`, // defaults to "React"
-        allExtensions: true, // defaults to false
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
