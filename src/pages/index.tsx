@@ -6,11 +6,11 @@ import Seo from "../components/Seo"
 import "/src/styles/index.css"
 
 const Container = styled(PageContainer)`
-  width: 100vw;
-  height: 100vh;
-
+  position: relative;
   display: grid;
   place-items: center;
+  width: 100%;
+  min-height: 100vh;
 `
 
 const IndexPage = () => (
@@ -22,7 +22,7 @@ const IndexPage = () => (
       <p
         style={{
           textAlign: "center",
-          fontSize: "3.5rem",
+          fontSize: "4rem",
           fontWeight: "bold",
         }}
       >

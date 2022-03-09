@@ -1,11 +1,11 @@
-import Layout from "../components/Layout"
+import { PageContainer } from "../components/layout"
 import Seo from "../components/Seo"
 
 const NotFoundPage = () => (
-  <Layout>
+  <PageContainer>
     <Seo title="404: Not found" />
     <h1>404: Not Found</h1>
-  </Layout>
+  </PageContainer>
 )
 
 export default NotFoundPage

@@ -1,12 +1,16 @@
 import { Link } from "gatsby"
 import styled from "styled-components"
 
-const CenterHorizontally = styled.div`
+const Foreground = styled.div`
+  z-index: 999;
+`
+
+const CenterHorizontally = styled(Foreground)`
   left: 50%;
   transform: translateX(-50%);
 `
 
-const CenterVertically = styled.div`
+const CenterVertically = styled(Foreground)`
   top: 50%;
   transform: translateY(-50%);
 `

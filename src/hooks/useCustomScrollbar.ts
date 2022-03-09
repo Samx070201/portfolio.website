@@ -9,8 +9,8 @@ export function useIsScrollable(): boolean {
     const [shouldShow, setShouldShow] = useState(false)
 
     useEffect(() => {
-        setShouldShow(document.body.scrollHeight > document.body.clientHeight)
-    }, [document])
+        setShouldShow(document.body.scrollHeight > window.innerHeight)
+    })
 
     return shouldShow
 }

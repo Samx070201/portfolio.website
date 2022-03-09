@@ -16,8 +16,8 @@ function PageContainer({ children, className, style }: PageContainerProps) {
     <>
       <main className={className} style={style}>
         {children}
+        <Footer />
       </main>
-      <Footer />
 
       {isScrollable && <ScrollBar />}
     </>
