@@ -15,7 +15,7 @@ const config: GatsbyConfig = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,
-        path: path.resolve('src/images'),
+        path: path.resolve("src/images"),
       },
     },
     `gatsby-transformer-sharp`,
@@ -26,10 +26,7 @@ const config: GatsbyConfig = {
         name: `samuelemusazzi-portfolio`,
         short_name: `samuele's`,
         start_url: `/`,
-        background_color: `#663399`,
-        // This will impact how browsers show your PWA/website
-        // https://css-tricks.com/meta-theme-color-and-trickery/
-        // theme_color: `#663399`,
+        background_color: `#1fdf64`,
         display: `minimal-ui`,
         icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
       },
