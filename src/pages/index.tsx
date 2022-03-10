@@ -14,11 +14,11 @@ const Container = styled(PageContainer)`
 `
 
 const IndexPage = () => (
-  <Container>
+  <Container cursorHighlight>
     <Seo title="Home" />
     <Navigation />
 
-    <section>
+    <section style={{ position: "relative" }}>
       <p
         style={{
           textAlign: "center",
