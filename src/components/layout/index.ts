@@ -1,4 +1,2 @@
-export { default as Footer } from "./Footer"
-export { default as Navigation } from "./Navigation"
-export { default as PageContainer } from "./PageContainer"
-export { default as FootScrollBarer } from "./ScrollBar"
+export { default as Layout } from './container/Container'
+export * from "./ScrollBar"
