@@ -4,9 +4,14 @@
   --nav-menu: #414141;
   --side-menu: #333333;
   --side-menu-open: #252526;
+  --side-menu-item-hover: #2a2d2e;
+  --side-menu-item-active: #37373d;
 
   --text-color: #cccccc;
 
-  --primary-color: #24adf3;
+  --primary-color: #007acc;
   --primary-color-dark: #0186d0;
+
+  --nav-menu-height: 1.8rem;
+  --footer-height: 1.4rem;
 }

@@ -32,6 +32,8 @@ const MenuDropdown = styled(MenuItem)<MenuDropdownStyleProps>`
   align-items: center;
   padding: 0 0.5rem;
 
+  user-select: none;
+
   font-weight: 500;
 
   ${({ disabled }) => disabled && "color: #8d8d8d;"}

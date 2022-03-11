@@ -2,15 +2,15 @@ import { useMemo } from "react";
 import { AvailablePages } from "../constants";
 
 /**
- * Gets the name of the currently shown page.
+ * Gets the name of the root pathname page.
  * 
  * @returns the name of the page as a string.
  */
-export function useCurrentPageName(): AvailablePages {
+export function useCurrentTopLevelPageName(): AvailablePages {
     const currentPage = useMemo(() => {
         const splitPathName = window.location.pathname.split('/')
 
-        return splitPathName[splitPathName.length - 1]
+        return splitPathName[1]
     }, [])
 
     return currentPage as AvailablePages

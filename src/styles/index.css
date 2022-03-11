@@ -19,6 +19,10 @@ body {
   background-color: var(--bg-color, white);
 }
 
+a {
+  text-decoration: none;
+}
+
 a:link,
 a:visited {
   color: whitesmoke;

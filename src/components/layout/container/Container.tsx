@@ -1,7 +1,8 @@
 import { CSSProperties } from "react"
 import styled from "styled-components"
+import Footer from "./Footer"
 import NavMenu from "./NavMenu"
-import SideMenu from "./SideMenu"
+import SideMenu from "./side-menu/SideMenu"
 
 const Main = styled.main`
   width: 100%;
@@ -11,7 +12,7 @@ const Main = styled.main`
 const Workspace = styled.div`
   display: flex;
   align-items: stretch;
-  height: 100%;
+  height: calc(100% - var(--nav-menu-height) - var(--footer-height));
 `
 
 interface ContainerProps {
@@ -30,6 +31,8 @@ const Container = ({ title, children, style }: ContainerProps) => {
 
         <section style={style}>{children}</section>
       </Workspace>
+
+      <Footer />
     </Main>
   )
 }
