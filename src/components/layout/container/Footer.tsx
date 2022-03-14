@@ -1,4 +1,3 @@
-import { Link } from "gatsby"
 import styled from "styled-components"
 
 const FooterContainer = styled.div`
@@ -17,13 +16,13 @@ const Footer = () => {
       >
         account_tree
       </span>
-      <Link
-        to="https://github.com/Samx070201"
+      <a
+        href="https://github.com/Samx070201"
         style={{ fontSize: "0.75rem" }}
         target="_blank"
       >
         <span>my GitHub profile</span>
-      </Link>
+      </a>
     </FooterContainer>
   )
 }

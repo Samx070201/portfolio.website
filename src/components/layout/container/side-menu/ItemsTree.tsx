@@ -7,6 +7,7 @@ interface ItemsTreeProps {
 
 const Tree = styled.ul`
   list-style-type: none;
+  position: relative;
 
   margin: 0;
   padding: 0;

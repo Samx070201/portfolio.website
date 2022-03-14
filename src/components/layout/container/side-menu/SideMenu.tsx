@@ -2,10 +2,7 @@ import { Link } from "gatsby"
 import { CSSProperties, useMemo, useState } from "react"
 import styled from "styled-components"
 import { availablePages, explorerItems } from "../../../../constants"
-import {
-  useCurrentPageName,
-  useCurrentTopLevelPageName,
-} from "../../../../hooks"
+import { useCurrentTopLevelPageName } from "../../../../hooks"
 import Explorer from "./Explorer"
 
 const Aside = styled.aside`
@@ -84,11 +81,8 @@ const SideMenu = ({ className, style }: SideMenuProps) => {
             <ExplorerLinkItem
               key={to}
               active={activeLink}
-              onClick={e => {
+              onClick={() => {
                 if (activeLink) {
-                  e.stopPropagation()
-                  e.preventDefault()
-
                   setShowExplorer(prev => !prev)
                 }
               }}

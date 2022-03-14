@@ -11,23 +11,27 @@ export interface TreeNode {
   subNodes?: TreeNode | TreeNode[]
 }
 
-interface NodeStyleProps {
-  active?: boolean
-}
-
-const Node = styled.div<NodeStyleProps>`
+const Node = styled.div`
   display: flex;
   align-items: center;
   padding-right: 1.25rem;
-  min-height: 24px;
+  height: 1.6em;
   user-select: none;
-  ${({ active }) => active && "background-color: var(--side-menu-item-active)"};
+  position: relative;
+  cursor: pointer;
+`
 
-  :hover {
-    background-color: ${({ active }) =>
-      active ? "var(--side-menu-item-active)" : "var(--side-menu-item-hover)"};
-    cursor: pointer;
-  }
+interface NodeHighlightStyleProps {
+  active?: boolean
+}
+
+const NodeHighlight = styled.div<NodeHighlightStyleProps>`
+  position: absolute;
+  width: 100%;
+  height: 1.6em;
+  left: 0;
+  background-color: ${({ active }) =>
+    active ? "var(--side-menu-item-active)" : "var(--side-menu-item-hover)"};
 `
 
 interface TreeItemProps extends TreeNode {
@@ -44,12 +48,18 @@ const TreeItem = ({
   const currentPage = useCurrentPageName()
 
   const [showSubNodes, setShowSubNodes] = useState<boolean>(true)
+  const [showHoverEffect, setShowHoverEffect] = useState<boolean>(false)
 
   const isActive = useMemo(() => currentPage === nodeId, [currentPage])
 
   return (
     <div style={style}>
-      <Node active={isActive} onClick={() => setShowSubNodes(prev => !prev)}>
+      {(showHoverEffect || isActive) && <NodeHighlight active={isActive} />}
+      <Node
+        onClick={() => setShowSubNodes(prev => !prev)}
+        onMouseEnter={() => setShowHoverEffect(true)}
+        onMouseLeave={() => setShowHoverEffect(false)}
+      >
         {subNodes && <ExpandIcon collapse={showSubNodes} />}
         {!root &&
           (subNodes ? (
@@ -69,6 +79,7 @@ const TreeItem = ({
           ))}
         {content}
       </Node>
+
       {showSubNodes &&
         subNodes &&
         (Array.isArray(subNodes) ? (
@@ -79,9 +90,8 @@ const TreeItem = ({
               content={subNode.content}
               subNodes={subNode.subNodes}
               style={{
-                padding: subNode.subNodes
-                  ? "0.25rem 0 0 0.5rem"
-                  : "0.25rem 0 0 1.5rem",
+                paddingLeft: subNode.subNodes ? "0.5rem" : "1.5rem",
+                marginTop: "0.25rem",
               }}
             />
           ))
@@ -91,9 +101,8 @@ const TreeItem = ({
             content={subNodes.content}
             subNodes={subNodes.subNodes}
             style={{
-              padding: subNodes.subNodes
-                ? "0.25rem 0 0 0.5rem"
-                : "0.25rem 0 0 1.5rem",
+              paddingLeft: subNodes.subNodes ? "0.5rem" : "1.5rem",
+              marginTop: "0.25rem",
             }}
           />
         ))}

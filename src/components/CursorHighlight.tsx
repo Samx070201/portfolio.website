@@ -44,7 +44,7 @@ const CursorHighlight = () => {
       style={{
         position: "fixed",
         top: 0,
-        zIndex: 0,
+        left: 0,
       }}
     />
   )
