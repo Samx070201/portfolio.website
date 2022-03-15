@@ -12,23 +12,24 @@ export interface TreeNode {
 }
 
 const Node = styled.div`
+  height: 1.7em;
+`
+
+const NodeContent = styled(Node)`
   display: flex;
   align-items: center;
   padding-right: 1.25rem;
-  height: 1.6em;
   user-select: none;
   position: relative;
-  cursor: pointer;
 `
 
 interface NodeHighlightStyleProps {
   active?: boolean
 }
 
-const NodeHighlight = styled.div<NodeHighlightStyleProps>`
+const NodeHighlight = styled(Node)<NodeHighlightStyleProps>`
   position: absolute;
   width: 100%;
-  height: 1.6em;
   left: 0;
   background-color: ${({ active }) =>
     active ? "var(--side-menu-item-active)" : "var(--side-menu-item-hover)"};
@@ -53,9 +54,9 @@ const TreeItem = ({
   const isActive = useMemo(() => currentPage === nodeId, [currentPage])
 
   return (
-    <div style={style}>
+    <div style={{ cursor: "pointer", ...style }}>
       {(showHoverEffect || isActive) && <NodeHighlight active={isActive} />}
-      <Node
+      <NodeContent
         onClick={() => setShowSubNodes(prev => !prev)}
         onMouseEnter={() => setShowHoverEffect(true)}
         onMouseLeave={() => setShowHoverEffect(false)}
@@ -78,7 +79,7 @@ const TreeItem = ({
             </span>
           ))}
         {content}
-      </Node>
+      </NodeContent>
 
       {showSubNodes &&
         subNodes &&
@@ -89,10 +90,7 @@ const TreeItem = ({
               nodeId={subNode.nodeId}
               content={subNode.content}
               subNodes={subNode.subNodes}
-              style={{
-                paddingLeft: subNode.subNodes ? "0.5rem" : "1.5rem",
-                marginTop: "0.25rem",
-              }}
+              style={{ paddingLeft: subNode.subNodes ? "0.5rem" : "1.5rem" }}
             />
           ))
         ) : (
@@ -100,10 +98,7 @@ const TreeItem = ({
             nodeId={subNodes.nodeId}
             content={subNodes.content}
             subNodes={subNodes.subNodes}
-            style={{
-              paddingLeft: subNodes.subNodes ? "0.5rem" : "1.5rem",
-              marginTop: "0.25rem",
-            }}
+            style={{ paddingLeft: subNodes.subNodes ? "0.5rem" : "1.5rem" }}
           />
         ))}
     </div>

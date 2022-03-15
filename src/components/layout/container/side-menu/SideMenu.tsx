@@ -1,16 +1,16 @@
-import { Link } from "gatsby"
 import { CSSProperties, useMemo, useState } from "react"
 import styled from "styled-components"
 import { availablePages, explorerItems } from "../../../../constants"
 import { useCurrentTopLevelPageName } from "../../../../hooks"
 import Explorer from "./Explorer"
+import SideMenuLink from "./SideMenuLink"
 
 const Aside = styled.aside`
   background-color: var(--side-menu);
   display: flex;
 `
 
-const ExplorerLinks = styled.ul`
+const SideMenuLinks = styled.ul`
   list-style-type: none;
 
   background-color: var(--side-menu);
@@ -20,43 +20,6 @@ const ExplorerLinks = styled.ul`
 
   display: flex;
   flex-direction: column;
-`
-
-interface ExplorerLinkItemProps {
-  active?: boolean
-}
-
-const ExplorerLinkItem = styled.li<ExplorerLinkItemProps>`
-  position: relative;
-  padding: 0.5rem;
-  opacity: ${({ active }) => (active ? 1 : 0.5)};
-
-  :hover {
-    opacity: 1;
-    cursor: pointer;
-  }
-
-  ${({ active }) =>
-    active &&
-    `:after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 2px;
-    height: 100%;
-    background-color: whitesmoke;
-  }`}
-
-  :active:after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 2px;
-    height: 100%;
-    background-color: var(--primary-color);
-  }
 `
 
 interface SideMenuProps {
@@ -73,27 +36,38 @@ const SideMenu = ({ className, style }: SideMenuProps) => {
 
   return (
     <Aside className={className} style={style}>
-      <ExplorerLinks>
-        {availablePages.map(({ to, icon }) => {
+      <SideMenuLinks>
+        {availablePages.map(({ to, pageName, icon }) => {
           const activeLink = currentPath === to
 
           return (
-            <ExplorerLinkItem
+            <SideMenuLink
               key={to}
+              to={to}
+              icon={icon}
               active={activeLink}
               onClick={() => {
                 if (activeLink) {
                   setShowExplorer(prev => !prev)
                 }
               }}
-            >
-              <Link to={to}>
-                <span className="material-icons md-36">{icon}</span>
-              </Link>
-            </ExplorerLinkItem>
+              popoverContent={
+                <span
+                  style={{
+                    display: "inline-block",
+                    fontSize: "0.75rem",
+                    padding: "0.25rem 0.5rem",
+                    backgroundColor: "var(--side-menu)",
+                    border: "0.5px solid #3f3f3f",
+                  }}
+                >
+                  {pageName}
+                </span>
+              }
+            />
           )
         })}
-      </ExplorerLinks>
+      </SideMenuLinks>
       {showExplorer && explorerItems[currentPage] && (
         <Explorer items={explorerItems[currentPage] ?? []} />
       )}

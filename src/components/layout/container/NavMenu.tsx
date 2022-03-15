@@ -1,11 +1,8 @@
-import { OffsetModifier } from "@popperjs/core/lib/modifiers/offset"
 import { Link } from "gatsby"
 import { StaticImage } from "gatsby-plugin-image"
-import { useCallback, useMemo } from "react"
-import { useState } from "react"
-import { usePopper } from "react-popper"
+import { useCallback, useState } from "react"
 import styled from "styled-components"
-import { useClickedOutside } from "../../../hooks"
+import Popover from "../../Popover"
 
 const Container = styled.ul`
   list-style-type: none;
@@ -52,18 +49,6 @@ const MenuDropdown = styled(MenuItem)<MenuDropdownStyleProps>`
   }
 `
 
-interface PopoverStyleProps {
-  show?: boolean
-}
-
-const Popover = styled.div<PopoverStyleProps>`
-  visibility: ${({ show }) => (show ? "visible" : "hidden")};
-  background-color: var(--side-menu-open);
-  padding: 0.4rem 0.1rem;
-  box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.6);
-  z-index: 999;
-`
-
 const PopoverItem = styled.span`
   width: 12em;
   display: flex;
@@ -86,48 +71,19 @@ interface NavMenuProps {
 const NavMenu = ({ title }: NavMenuProps) => {
   const [referenceElement, setReferenceElement] =
     useState<HTMLLIElement | null>(null)
-  const [popperElement, setPopperElement] = useState<HTMLDivElement | null>(
-    null
-  )
 
   const [showDownloadPopover, setShowDownloadPopover] = useState<boolean>(false)
-
-  const offsetModifier = useMemo<Partial<OffsetModifier>>(
-    () => ({
-      name: "offset",
-      options: {
-        offset: ({ placement }) => {
-          if (placement === "bottom") {
-            return [68, 0]
-          } else {
-            return [0, 0]
-          }
-        },
-      },
-    }),
-    []
-  )
-
-  const { styles, attributes } = usePopper(referenceElement, popperElement, {
-    modifiers: [offsetModifier],
-  })
 
   const hideDownloadPopover = useCallback(() => {
     setShowDownloadPopover(false)
   }, [setShowDownloadPopover])
-
-  useClickedOutside(
-    popperElement,
-    hideDownloadPopover,
-    referenceElement ? [referenceElement] : []
-  )
 
   return (
     <Container>
       <MenuDropdown>
         <Link to="/">
           <StaticImage
-            src="https://picsum.photos/24"
+            src="https://picsum.photos/22"
             alt="Samuele Musazzi's logo"
           />
         </Link>
@@ -141,9 +97,13 @@ const NavMenu = ({ title }: NavMenuProps) => {
       </MenuDropdown>
       <Popover
         show={showDownloadPopover}
-        ref={setPopperElement}
-        style={styles.popper}
-        {...attributes.popper}
+        parentRef={referenceElement}
+        style={{
+          backgroundColor: "var(--side-menu-open)",
+          padding: "0.4rem 0.1rem",
+        }}
+        offset={[68, 0]}
+        onClickedOutside={hideDownloadPopover}
       >
         <PopoverItem>
           Download CV

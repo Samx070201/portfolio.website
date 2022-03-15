@@ -4,8 +4,9 @@ import { TreeNode } from "../components/layout/container/side-menu/TreeItem"
 export type AvailablePages = "home" | "portfolio" | "contacts" | "about"
 export type TopLevelPages = AvailablePages | ""
 
-interface ExplorerMenuLink {
-  to: `/${TopLevelPages}`
+interface SideMenuLink {
+  to: `/${AvailablePages}`
+  pageName: AvailablePages
   icon: string
 }
 
@@ -13,21 +14,25 @@ type ExplorerItems = {
   [key in AvailablePages]?: TreeNode[]
 }
 
-export const availablePages: ExplorerMenuLink[] = [
+export const availablePages: SideMenuLink[] = [
   {
     to: "/home",
+    pageName: "home",
     icon: "home",
   },
   {
     to: "/portfolio",
+    pageName: "portfolio",
     icon: "perm_identity",
   },
   {
     to: "/contacts",
+    pageName: "contacts",
     icon: "phone",
   },
   {
     to: "/about",
+    pageName: "about",
     icon: "question_mark",
   },
 ]

@@ -8,7 +8,7 @@ const IndexPage = () => (
     <Seo title="Welcome!" />
 
     <Layout
-      title="index.tsx - Samuele's portoflio - Samuele Studio Code"
+      title="index.tsx - Samuele's portfolio - Samuele Studio Code"
       style={{
         padding: "1rem",
         flex: 1,
