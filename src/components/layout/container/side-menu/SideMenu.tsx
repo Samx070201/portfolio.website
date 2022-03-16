@@ -58,7 +58,7 @@ const SideMenu = ({ className, style }: SideMenuProps) => {
                     fontSize: "0.75rem",
                     padding: "0.25rem 0.5rem",
                     backgroundColor: "var(--side-menu)",
-                    border: "0.5px solid #3f3f3f",
+                    border: "0.5px solid var(--side-menu-popover-border)",
                   }}
                 >
                   {pageName}

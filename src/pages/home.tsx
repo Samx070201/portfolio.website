@@ -17,7 +17,7 @@ const HomePage = () => (
       }}
     >
       <p style={{ fontSize: "3rem" }}>
-        <span>Home route test</span>
+        <span>Home</span>
       </p>
     </Layout>
   </>

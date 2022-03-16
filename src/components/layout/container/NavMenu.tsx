@@ -1,4 +1,4 @@
-import { Link } from "gatsby"
+import { graphql, Link, useStaticQuery } from "gatsby"
 import { StaticImage } from "gatsby-plugin-image"
 import { useCallback, useState } from "react"
 import styled from "styled-components"
@@ -49,7 +49,7 @@ const MenuDropdown = styled(MenuItem)<MenuDropdownStyleProps>`
   }
 `
 
-const PopoverItem = styled.span`
+const PopoverItem = styled.a`
   width: 12em;
   display: flex;
   align-items: center;
@@ -59,7 +59,7 @@ const PopoverItem = styled.span`
   user-select: none;
 
   :hover {
-    background-color: var(--hover-nav-menu-item);
+    background-color: var(--nav-menu-item-hover);
     color: white;
   }
 `
@@ -73,6 +73,28 @@ const NavMenu = ({ title }: NavMenuProps) => {
     useState<HTMLLIElement | null>(null)
 
   const [showDownloadPopover, setShowDownloadPopover] = useState<boolean>(false)
+
+  const {
+    allFile: {
+      edges: [
+        {
+          node: { publicURL },
+        },
+      ],
+    },
+  } = useStaticQuery(
+    graphql`
+      query {
+        allFile(filter: { sourceInstanceName: { eq: "resources" } }) {
+          edges {
+            node {
+              publicURL
+            }
+          }
+        }
+      }
+    `
+  )
 
   const hideDownloadPopover = useCallback(() => {
     setShowDownloadPopover(false)
@@ -105,7 +127,7 @@ const NavMenu = ({ title }: NavMenuProps) => {
         offset={[68, 0]}
         onClickedOutside={hideDownloadPopover}
       >
-        <PopoverItem>
+        <PopoverItem href={publicURL} download>
           Download CV
           <span className="material-icons md-18">file_download</span>
         </PopoverItem>

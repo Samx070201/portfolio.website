@@ -2,17 +2,19 @@
   --bg-color: #1e1e1e;
 
   --nav-menu: #414141;
+  --nav-menu-item-hover: #094771;
+  --nav-menu-height: 1.8rem;
+
   --side-menu: #333333;
   --side-menu-open: #252526;
   --side-menu-item-hover: #2a2d2e;
   --side-menu-item-active: #37373d;
+  --side-menu-popover-border: #3f3f3f;
 
   --text-color: #cccccc;
 
   --primary-color: #007acc;
   --primary-color-dark: #0186d0;
-  --hover-nav-menu-item: #094771;
 
-  --nav-menu-height: 1.8rem;
   --footer-height: 1.4rem;
 }

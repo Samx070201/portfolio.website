@@ -5,8 +5,18 @@ const AboutPage = () => (
   <>
     <Seo title="About" />
 
-    <Layout title="about.tsx" style={{ padding: "1rem" }}>
-      <span>about</span>
+    <Layout
+      title="about.tsx"
+      style={{
+        padding: "1rem",
+        flex: 1,
+        display: "grid",
+        placeItems: "center",
+      }}
+    >
+      <p style={{ fontSize: "3rem" }}>
+        <span>About</span>
+      </p>
     </Layout>
   </>
 )

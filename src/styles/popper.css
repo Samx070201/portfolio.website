@@ -1,0 +1,39 @@
+/*
+  Popper arrow setup
+*/
+
+#arrow,
+#arrow::before {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: var(--side-menu);
+  border-left: 1px solid var(--side-menu-popover-border);
+  border-bottom: 1px solid var(--side-menu-popover-border);
+}
+
+#arrow {
+  visibility: hidden;
+}
+
+#arrow::before {
+  visibility: visible;
+  content: "";
+  transform: rotate(45deg);
+}
+
+#tooltip[data-popper-placement^="top"] > #arrow {
+  bottom: -4px;
+}
+
+#tooltip[data-popper-placement^="bottom"] > #arrow {
+  top: -4px;
+}
+
+#tooltip[data-popper-placement^="left"] > #arrow {
+  right: -4px;
+}
+
+#tooltip[data-popper-placement^="right"] > #arrow {
+  left: -4px;
+}

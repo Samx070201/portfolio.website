@@ -1,5 +1,6 @@
 import { CSSProperties } from "react"
 import styled from "styled-components"
+import Content from "./Content"
 import Footer from "./Footer"
 import NavMenu from "./NavMenu"
 import SideMenu from "./side-menu/SideMenu"
@@ -18,10 +19,11 @@ const Workspace = styled.div`
 interface ContainerProps {
   title: string
   children: React.ReactNode
+  className?: string
   style?: CSSProperties
 }
 
-const Container = ({ title, children, style }: ContainerProps) => {
+const Container = ({ title, children, className, style }: ContainerProps) => {
   return (
     <Main>
       <NavMenu title={title} />
@@ -29,7 +31,9 @@ const Container = ({ title, children, style }: ContainerProps) => {
       <Workspace>
         <SideMenu />
 
-        <section style={style}>{children}</section>
+        <Content className={className} style={style}>
+          {children}
+        </Content>
       </Workspace>
 
       <Footer />

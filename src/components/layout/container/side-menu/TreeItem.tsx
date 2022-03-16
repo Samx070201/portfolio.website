@@ -18,7 +18,7 @@ const Node = styled.div`
 const NodeContent = styled(Node)`
   display: flex;
   align-items: center;
-  padding-right: 1.25rem;
+  padding-right: 1.5rem;
   user-select: none;
   position: relative;
 `
