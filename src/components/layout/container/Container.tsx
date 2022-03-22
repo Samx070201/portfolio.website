@@ -4,6 +4,7 @@ import Content from "./Content"
 import Footer from "./Footer"
 import NavMenu from "./NavMenu"
 import SideMenu from "./side-menu/SideMenu"
+import TopExplorer from "./top-explorer/TopExplorer"
 
 const Main = styled.main`
   width: 100%;
@@ -31,9 +32,12 @@ const Container = ({ title, children, className, style }: ContainerProps) => {
       <Workspace>
         <SideMenu />
 
-        <Content className={className} style={style}>
-          {children}
-        </Content>
+        <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
+          <TopExplorer items={[]} />
+          <Content className={className} style={style}>
+            {children}
+          </Content>
+        </div>
       </Workspace>
 
       <Footer />

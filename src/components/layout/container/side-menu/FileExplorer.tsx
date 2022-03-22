@@ -15,7 +15,7 @@ const Header = styled.div`
   padding: 0.75rem 1.25rem;
 `
 
-const Explorer = ({ items }: ExplorerProps) => {
+const FileExplorer = ({ items }: ExplorerProps) => {
   return (
     <Container>
       <Header>
@@ -26,4 +26,4 @@ const Explorer = ({ items }: ExplorerProps) => {
   )
 }
 
-export default Explorer
+export default FileExplorer

@@ -2,7 +2,7 @@ import { CSSProperties, useMemo, useState } from "react"
 import styled from "styled-components"
 import { availablePages, explorerItems } from "../../../../constants"
 import { useCurrentTopLevelPageName } from "../../../../hooks"
-import Explorer from "./Explorer"
+import FileExplorer from "./FileExplorer"
 import SideMenuLink from "./SideMenuLink"
 
 const Aside = styled.aside`
@@ -69,7 +69,7 @@ const SideMenu = ({ className, style }: SideMenuProps) => {
         })}
       </SideMenuLinks>
       {showExplorer && explorerItems[currentPage] && (
-        <Explorer items={explorerItems[currentPage] ?? []} />
+        <FileExplorer items={explorerItems[currentPage] ?? []} />
       )}
     </Aside>
   )
