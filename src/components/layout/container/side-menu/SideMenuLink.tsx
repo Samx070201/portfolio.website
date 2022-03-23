@@ -3,13 +3,12 @@ import { useState } from "react"
 import styled from "styled-components"
 import Popover from "../../../Popover"
 
-interface LinkItemProps {
+interface LinkContainerProps {
   active?: boolean
 }
 
-const LinkItem = styled.li<LinkItemProps>`
+const LinkContainer = styled.li<LinkContainerProps>`
   position: relative;
-  padding: 0.5rem;
   opacity: ${({ active }) => (active ? 1 : 0.5)};
 
   :hover {
@@ -40,6 +39,11 @@ const LinkItem = styled.li<LinkItemProps>`
   }
 `
 
+const LinkItem = styled(Link)`
+  display: inline-block;
+  padding: 0.5rem;
+`
+
 interface SideMenuLinkProps {
   to: string
   icon: string
@@ -63,11 +67,11 @@ const SideMenuLink = ({
 
   return (
     <>
-      <LinkItem ref={setItemRef} active={active} onClick={onClick}>
-        <Link to={to}>
+      <LinkContainer ref={setItemRef} active={active} onClick={onClick}>
+        <LinkItem to={to}>
           <span className="material-icons md-36">{icon}</span>
-        </Link>
-      </LinkItem>
+        </LinkItem>
+      </LinkContainer>
       {popover && (
         <Popover
           parentRef={itemRef}

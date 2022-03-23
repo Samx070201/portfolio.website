@@ -1,6 +1,6 @@
+import type { TreeNode } from "@common/types"
 import styled from "styled-components"
 import ItemsTree from "./ItemsTree"
-import { TreeNode } from "./TreeItem"
 
 interface ExplorerProps {
   items: TreeNode[]

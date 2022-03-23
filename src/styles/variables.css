@@ -5,11 +5,18 @@
   --nav-menu-item-hover: #094771;
   --nav-menu-height: 1.8rem;
 
+  --top-explorer-bg-color: #252526;
+  --top-explorer-tile-bg-color: #2d2d2d;
+  --top-explorer-tile-active-bg-color: #1e1e1e;
+  --top-explorer-tile-close-color: #9a9b8e;
+  --top-explorer-tile-close-hover-bg-color: #3b3c3c;
+
   --side-menu: #333333;
   --side-menu-open: #252526;
   --side-menu-item-hover: #2a2d2e;
   --side-menu-item-active: #37373d;
-  --side-menu-popover-border: #3f3f3f;
+  --side-menu-popover-bg-color: #202020;
+  --side-menu-popover-border: #474747;
 
   --text-color: #cccccc;
 

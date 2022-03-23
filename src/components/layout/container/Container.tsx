@@ -1,3 +1,4 @@
+import { visitedPages } from "@common/constants"
 import { CSSProperties } from "react"
 import styled from "styled-components"
 import Content from "./Content"
@@ -33,7 +34,7 @@ const Container = ({ title, children, className, style }: ContainerProps) => {
         <SideMenu />
 
         <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
-          <TopExplorer items={[]} />
+          <TopExplorer items={visitedPages} />
           <Content className={className} style={style}>
             {children}
           </Content>

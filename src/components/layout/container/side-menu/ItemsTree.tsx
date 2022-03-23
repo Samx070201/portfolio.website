@@ -1,5 +1,6 @@
+import type { TreeNode } from "@common/types"
 import styled from "styled-components"
-import TreeItem, { TreeNode } from "./TreeItem"
+import TreeItem from "./TreeItem"
 
 interface ItemsTreeProps {
   items: TreeNode[]

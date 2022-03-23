@@ -1,9 +1,9 @@
 import { CSSProperties, useMemo, useState } from "react"
 import styled from "styled-components"
-import { availablePages, explorerItems } from "../../../../constants"
-import { useCurrentTopLevelPageName } from "../../../../hooks"
+import { availablePages, explorerItems } from "@common"
 import FileExplorer from "./FileExplorer"
 import SideMenuLink from "./SideMenuLink"
+import { useCurrentTopLevelPageName } from "@hooks"
 
 const Aside = styled.aside`
   background-color: var(--side-menu);
@@ -57,8 +57,8 @@ const SideMenu = ({ className, style }: SideMenuProps) => {
                     display: "inline-block",
                     fontSize: "0.75rem",
                     padding: "0.25rem 0.5rem",
-                    backgroundColor: "var(--side-menu)",
-                    border: "0.5px solid var(--side-menu-popover-border)",
+                    backgroundColor: "var(--side-menu-popover-bg-color)",
+                    border: "1px solid var(--side-menu-popover-border)",
                   }}
                 >
                   {pageName}

@@ -6,7 +6,7 @@ import { useCallback } from "react"
 import { CSSProperties, ReactNode, useMemo, useState } from "react"
 import { usePopper } from "react-popper"
 import styled from "styled-components"
-import { useClickedOutside } from "../hooks"
+import { useClickedOutside } from "@hooks"
 
 interface BaseStyleProps {
   show?: boolean

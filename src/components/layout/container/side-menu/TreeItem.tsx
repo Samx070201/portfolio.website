@@ -1,15 +1,8 @@
 import { CSSProperties, useMemo, useState } from "react"
 import styled from "styled-components"
-import { useCurrentPageName } from "../../../../hooks"
+import type { TreeNode } from "@common/types"
+import { useCurrentPageName } from "@hooks"
 import ExpandIcon from "./ExpandIcon"
-
-export interface TreeNode {
-  nodeId: string | null
-  content: React.ReactNode
-  root?: boolean
-  icon?: React.ReactNode
-  subNodes?: TreeNode | TreeNode[]
-}
 
 const Node = styled.div`
   height: 1.7em;
@@ -39,13 +32,13 @@ interface TreeItemProps extends TreeNode {
   style?: CSSProperties
 }
 
-const TreeItem = ({
+function TreeItem({
   nodeId,
   content,
   subNodes,
   style,
   root = false,
-}: TreeItemProps) => {
+}: TreeItemProps) {
   const currentPage = useCurrentPageName()
 
   const [showSubNodes, setShowSubNodes] = useState<boolean>(true)

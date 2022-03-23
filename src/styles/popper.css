@@ -5,9 +5,9 @@
 #arrow,
 #arrow::before {
   position: absolute;
-  width: 10px;
-  height: 10px;
-  background: var(--side-menu);
+  width: 7px;
+  height: 7px;
+  background: var(--side-menu-popover-bg-color);
   border-left: 1px solid var(--side-menu-popover-border);
   border-bottom: 1px solid var(--side-menu-popover-border);
 }
@@ -23,17 +23,17 @@
 }
 
 #tooltip[data-popper-placement^="top"] > #arrow {
-  bottom: -4px;
+  bottom: -5px;
 }
 
 #tooltip[data-popper-placement^="bottom"] > #arrow {
-  top: -4px;
+  top: -5px;
 }
 
 #tooltip[data-popper-placement^="left"] > #arrow {
-  right: -4px;
+  right: -5px;
 }
 
 #tooltip[data-popper-placement^="right"] > #arrow {
-  left: -4px;
+  left: -5px;
 }

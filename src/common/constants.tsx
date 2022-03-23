@@ -1,17 +1,10 @@
 import { Link } from "gatsby"
-import { TreeNode } from "../components/layout/container/side-menu/TreeItem"
-
-export type AvailablePages = "home" | "portfolio" | "contacts" | "about"
-export type TopLevelPages = AvailablePages | ""
+import type { AvailablePages, TopExplorerItem, TreeNode } from "./types"
 
 interface SideMenuLink {
   to: `/${AvailablePages}`
   pageName: AvailablePages
   icon: string
-}
-
-type ExplorerItems = {
-  [key in AvailablePages]?: TreeNode[]
 }
 
 export const availablePages: SideMenuLink[] = [
@@ -37,6 +30,10 @@ export const availablePages: SideMenuLink[] = [
   },
 ]
 
+type ExplorerItems = {
+  [key in AvailablePages]?: TreeNode[]
+}
+
 export const explorerItems: ExplorerItems = {
   home: [
     {
@@ -52,3 +49,14 @@ export const explorerItems: ExplorerItems = {
     },
   ],
 }
+
+export const visitedPages: TopExplorerItem[] = [
+  {
+    icon: "html",
+    title: "home",
+  },
+  {
+    icon: "html",
+    title: "about",
+  },
+]
