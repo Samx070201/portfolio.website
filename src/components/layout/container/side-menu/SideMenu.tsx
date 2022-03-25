@@ -1,7 +1,7 @@
 import { CSSProperties, useMemo, useState } from "react"
 import styled from "styled-components"
 import { availablePages, explorerItems } from "@common"
-import FileExplorer from "./FileExplorer"
+import FileExplorer from "./file-explorer/FileExplorer"
 import SideMenuLink from "./SideMenuLink"
 import { useCurrentTopLevelPageName } from "@hooks"
 
@@ -44,6 +44,7 @@ const SideMenu = ({ className, style }: SideMenuProps) => {
             <SideMenuLink
               key={to}
               to={to}
+              pageName={pageName}
               icon={icon}
               active={activeLink}
               onClick={() => {

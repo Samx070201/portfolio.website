@@ -1,14 +1,15 @@
 import { CSSProperties } from "react"
 import styled from "styled-components"
 import { AvailablePages, TopExplorerItem } from "@common/types"
+import { Link } from "gatsby"
 
 interface ItemStyleProps {
-  active: boolean
+  $active: boolean
 }
 
-const Item = styled.div<ItemStyleProps>`
-  background-color: ${({ active }) =>
-    active
+const Item = styled(Link)<ItemStyleProps>`
+  background-color: ${({ $active }) =>
+    $active
       ? "var(--top-explorer-tile-active-bg-color)"
       : "var(--top-explorer-tile-bg-color)"};
   display: flex;
@@ -17,7 +18,7 @@ const Item = styled.div<ItemStyleProps>`
   cursor: pointer;
 
   .iconVisibility {
-    visibility: ${({ active }) => (active ? "visible" : "hidden")};
+    visibility: ${({ $active }) => ($active ? "visible" : "hidden")};
   }
 
   :hover {
@@ -59,30 +60,41 @@ const Title = styled.span`
 
 interface TopExplorerTileProps extends Omit<TopExplorerItem, "title"> {
   title: `${AvailablePages}.html`
+
   active?: boolean
   className?: string
   style?: CSSProperties
+
+  onClose: () => void
 }
 
 const TopExplorerTile = ({
   icon,
   title,
-  active = false,
+  href,
+
+  onClose,
+
   className,
   style,
-}: TopExplorerTileProps) => {
-  return (
-    <Item active={active} className={className} style={style}>
-      <Icon color="#dd4c35">{icon}</Icon>
-      <Title>{title}</Title>
-      <CloseIcon
-        className="iconVisibility"
-        color={active ? "whitesmoke" : "var(--top-explorer-tile-close-color)"}
-      >
-        close
-      </CloseIcon>
-    </Item>
-  )
-}
+
+  active = false,
+}: TopExplorerTileProps) => (
+  <Item to={href} $active={active} className={className} style={style}>
+    <Icon color="#dd4c35">{icon}</Icon>
+    <Title>{title}</Title>
+    <CloseIcon
+      className="iconVisibility"
+      color={active ? "whitesmoke" : "var(--top-explorer-tile-close-color)"}
+      onClick={e => {
+        onClose()
+
+        e.preventDefault()
+      }}
+    >
+      close
+    </CloseIcon>
+  </Item>
+)
 
 export default TopExplorerTile

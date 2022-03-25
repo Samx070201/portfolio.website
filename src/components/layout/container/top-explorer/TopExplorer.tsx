@@ -12,19 +12,24 @@ const Container = styled.div`
 
 interface TopExplorerProps {
   items: TopExplorerItem[]
+  onItemClose: (index: number) => void
 }
 
-const TopExplorer = ({ items }: TopExplorerProps) => {
+const TopExplorer = ({ items, onItemClose }: TopExplorerProps) => {
   const currentPage = useCurrentPageName()
 
   return (
     <Container>
-      {items.map(item => (
+      {items.map((item, index) => (
         <ExplorerItem
           key={item.title}
           icon={item.icon}
           title={`${item.title}.html`}
+          href={item.href}
           active={currentPage === item.title}
+          onClose={() => {
+            onItemClose(index)
+          }}
         />
       ))}
     </Container>

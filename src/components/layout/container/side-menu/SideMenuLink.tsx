@@ -1,4 +1,8 @@
+import { AvailablePages, TopExplorerItem } from "@common/types"
+import HistoryContext from "context/HistoryContext"
 import { Link } from "gatsby"
+import { useContext } from "react"
+import { useCallback } from "react"
 import { useState } from "react"
 import styled from "styled-components"
 import Popover from "../../../Popover"
@@ -45,7 +49,8 @@ const LinkItem = styled(Link)`
 `
 
 interface SideMenuLinkProps {
-  to: string
+  to: `/${AvailablePages}`
+  pageName: AvailablePages
   icon: string
   active: boolean
 
@@ -57,18 +62,23 @@ interface SideMenuLinkProps {
 
 const SideMenuLink = ({
   to,
+  pageName,
   icon,
   active,
   popover = true,
   popoverContent,
   onClick,
 }: SideMenuLinkProps) => {
+  const { addPage } = useContext(HistoryContext)
+
   const [itemRef, setItemRef] = useState<HTMLLIElement | null>(null)
+
+  const addVisitedPage = useCallback(() => addPage(pageName), [pageName])
 
   return (
     <>
       <LinkContainer ref={setItemRef} active={active} onClick={onClick}>
-        <LinkItem to={to}>
+        <LinkItem to={to} onClick={addVisitedPage}>
           <span className="material-icons md-36">{icon}</span>
         </LinkItem>
       </LinkContainer>

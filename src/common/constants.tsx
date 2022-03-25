@@ -1,5 +1,5 @@
 import { Link } from "gatsby"
-import type { AvailablePages, TopExplorerItem, TreeNode } from "./types"
+import type { AvailablePages, TreeNode } from "./types"
 
 interface SideMenuLink {
   to: `/${AvailablePages}`
@@ -49,14 +49,3 @@ export const explorerItems: ExplorerItems = {
     },
   ],
 }
-
-export const visitedPages: TopExplorerItem[] = [
-  {
-    icon: "html",
-    title: "home",
-  },
-  {
-    icon: "html",
-    title: "about",
-  },
-]

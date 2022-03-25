@@ -1,6 +1,7 @@
 import { AvailablePages } from "./Pages"
 
 export interface TopExplorerItem {
-  icon: string
+  icon: "html"
+  href: `/${AvailablePages}`;
   title: AvailablePages
 }

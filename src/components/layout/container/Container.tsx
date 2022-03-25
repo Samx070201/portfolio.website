@@ -1,11 +1,14 @@
-import { visitedPages } from "@common/constants"
-import { CSSProperties } from "react"
+import { CSSProperties, useCallback, useContext, useMemo } from "react"
 import styled from "styled-components"
 import Content from "./Content"
 import Footer from "./Footer"
 import NavMenu from "./NavMenu"
 import SideMenu from "./side-menu/SideMenu"
 import TopExplorer from "./top-explorer/TopExplorer"
+
+import HistoryContext from "context/HistoryContext"
+
+import type { TopExplorerItem } from "@common/types"
 
 const Main = styled.main`
   width: 100%;
@@ -26,6 +29,25 @@ interface ContainerProps {
 }
 
 const Container = ({ title, children, className, style }: ContainerProps) => {
+  const { visitedPages, removePageAt } = useContext(HistoryContext)
+
+  const topExplorerTiles = useMemo(() => {
+    return visitedPages.map<TopExplorerItem>(vp => ({
+      icon: "html",
+      title: vp,
+      href: `/${vp}`,
+    }))
+  }, [visitedPages])
+
+  const onItemClose = useCallback(
+    (index: number) => {
+      if (index >= 0) {
+        removePageAt(index)
+      }
+    },
+    [removePageAt]
+  )
+
   return (
     <Main>
       <NavMenu title={title} />
@@ -34,7 +56,9 @@ const Container = ({ title, children, className, style }: ContainerProps) => {
         <SideMenu />
 
         <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
-          <TopExplorer items={visitedPages} />
+          {!!visitedPages.length && (
+            <TopExplorer items={topExplorerTiles} onItemClose={onItemClose} />
+          )}
           <Content className={className} style={style}>
             {children}
           </Content>
