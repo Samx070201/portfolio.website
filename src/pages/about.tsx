@@ -6,7 +6,7 @@ const AboutPage = () => (
     <Seo title="About" />
 
     <Layout
-      title="about.tsx"
+      title="about.html - Samuele's portoflio - Samuele Studio Code"
       style={{
         padding: "1rem",
         flex: 1,

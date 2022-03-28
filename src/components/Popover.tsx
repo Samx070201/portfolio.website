@@ -1,9 +1,14 @@
+import {
+  useEffect,
+  useCallback,
+  CSSProperties,
+  ReactNode,
+  useMemo,
+  useState,
+} from "react"
 import { Placement, Rect } from "@popperjs/core"
 import { ArrowModifier } from "@popperjs/core/lib/modifiers/arrow"
 import { OffsetModifier } from "@popperjs/core/lib/modifiers/offset"
-import { useEffect } from "react"
-import { useCallback } from "react"
-import { CSSProperties, ReactNode, useMemo, useState } from "react"
 import { usePopper } from "react-popper"
 import styled from "styled-components"
 import { useClickedOutside } from "@hooks"

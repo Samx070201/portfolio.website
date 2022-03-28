@@ -6,7 +6,7 @@ const PortfolioPage = () => (
     <Seo title="Portfolio" />
 
     <Layout
-      title="portfolio.tsx"
+      title="portfolio.html - Samuele's portoflio - Samuele Studio Code"
       style={{
         padding: "1rem",
         flex: 1,

@@ -1,6 +1,6 @@
 import styled from "styled-components"
 
-const FooterContainer = styled.div`
+const FooterContainer = styled.footer`
   display: flex;
   align-items: center;
   height: var(--footer-height);

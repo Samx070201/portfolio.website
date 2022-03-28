@@ -6,7 +6,7 @@ const ContactsPage = () => (
     <Seo title="Contacts" />
 
     <Layout
-      title="contacts.tsx"
+      title="contacts.html - Samuele's portoflio - Samuele Studio Code"
       style={{
         padding: "1rem",
         flex: 1,

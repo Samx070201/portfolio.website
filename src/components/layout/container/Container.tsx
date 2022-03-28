@@ -7,6 +7,7 @@ import SideMenu from "./side-menu/SideMenu"
 import TopExplorer from "./top-explorer/TopExplorer"
 import { navigate } from "gatsby"
 import { clamp } from "@utility"
+import { useCurrentPageName } from "@hooks"
 
 import HistoryContext from "context/HistoryContext"
 
@@ -33,6 +34,8 @@ interface ContainerProps {
 const Container = ({ title, children, className, style }: ContainerProps) => {
   const { visitedPages, removePageAt } = useContext(HistoryContext)
 
+  const currentPage = useCurrentPageName()
+
   const topExplorerTiles = useMemo(() => {
     return visitedPages.map<TopExplorerItem>(vp => ({
       icon: "html",
@@ -52,12 +55,14 @@ const Container = ({ title, children, className, style }: ContainerProps) => {
           index
         )
 
-        navigate(`/${newVisitedPages[indexToNavigateTo] ?? ""}`, {
-          replace: true,
-        })
+        if (currentPage === visitedPages[index]) {
+          navigate(`/${newVisitedPages[indexToNavigateTo] ?? ""}`, {
+            replace: true,
+          })
+        }
       }
     },
-    [removePageAt]
+    [removePageAt, currentPage, visitedPages]
   )
 
   return (

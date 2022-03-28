@@ -4,6 +4,14 @@ import styled from "styled-components"
 const Section = styled.section`
   overflow-y: scroll;
   scroll-behavior: smooth;
+
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  ::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
 `
 
 interface ContentProps {

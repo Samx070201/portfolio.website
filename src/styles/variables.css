@@ -1,6 +1,11 @@
 :root {
   --bg-color: #1e1e1e;
 
+  --text-color: #cccccc;
+
+  --primary-color: #007acc;
+  --primary-color-dark: #0186d0;
+
   --nav-menu: #414141;
   --nav-menu-item-hover: #094771;
   --nav-menu-height: 1.8rem;
@@ -15,13 +20,8 @@
   --side-menu-open: #252526;
   --side-menu-item-hover: #2a2d2e;
   --side-menu-item-active: #37373d;
-  --side-menu-popover-bg-color: #202020;
+  --side-menu-popover-bg-color: #252525;
   --side-menu-popover-border: #474747;
-
-  --text-color: #cccccc;
-
-  --primary-color: #007acc;
-  --primary-color-dark: #0186d0;
 
   --footer-height: 1.4rem;
 }

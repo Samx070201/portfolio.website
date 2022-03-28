@@ -9,7 +9,7 @@ interface ExplorerProps {
 const Container = styled.div`
   background-color: var(--side-menu-open);
   font-size: 14px;
-  min-width: 9rem;
+  min-width: 10rem;
 `
 
 const Header = styled.div`
