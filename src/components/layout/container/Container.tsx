@@ -5,6 +5,8 @@ import Footer from "./Footer"
 import NavMenu from "./NavMenu"
 import SideMenu from "./side-menu/SideMenu"
 import TopExplorer from "./top-explorer/TopExplorer"
+import { navigate } from "gatsby"
+import { clamp } from "@utility"
 
 import HistoryContext from "context/HistoryContext"
 
@@ -42,7 +44,17 @@ const Container = ({ title, children, className, style }: ContainerProps) => {
   const onItemClose = useCallback(
     (index: number) => {
       if (index >= 0) {
-        removePageAt(index)
+        const newVisitedPages = removePageAt(index)
+
+        const indexToNavigateTo = clamp(
+          0,
+          newVisitedPages.length ? newVisitedPages.length - 1 : 0,
+          index
+        )
+
+        navigate(`/${newVisitedPages[indexToNavigateTo] ?? ""}`, {
+          replace: true,
+        })
       }
     },
     [removePageAt]

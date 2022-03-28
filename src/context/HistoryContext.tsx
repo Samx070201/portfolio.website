@@ -3,17 +3,21 @@ import { AvailablePages } from "@common/types"
 
 interface PagesHistory {
   visitedPages: AvailablePages[]
-  addPage: (page: AvailablePages) => void
-  removePageAt: (index: number) => void
+  addPage: (page: AvailablePages) => AvailablePages[]
+  removePageAt: (index: number) => AvailablePages[]
 }
 
 const defaultPagesHistoryContext: PagesHistory = {
   visitedPages: [],
   addPage: () => {
     console.warn("default implementation of addPage.")
+
+    return []
   },
   removePageAt: () => {
     console.warn("default implementation of removePageAt.")
+
+    return []
   },
 }
 
@@ -28,27 +32,32 @@ const HistoryProvider = ({ children }: HistoryProviderProps) => {
 
   const addPage = useCallback(
     (page: AvailablePages) => {
-      setVisitedPages(prev => {
-        if (!prev.some(vp => vp === page)) {
-          return [...prev, page]
-        }
+      const newVisitedPages = [...visitedPages]
 
-        return prev
-      })
+      if (!visitedPages.some(vp => vp === page)) {
+        newVisitedPages.push(page)
+
+        setVisitedPages(newVisitedPages)
+      }
+
+      return newVisitedPages
     },
-    [setVisitedPages]
+    [visitedPages, setVisitedPages]
   )
 
   const removePageAt = useCallback(
     (index: number) => {
-      setVisitedPages(prev => {
-        const newVisitedPages = [...prev]
+      const newVisitedPages = [...visitedPages]
+
+      if (index >= 0 && index < newVisitedPages.length) {
         newVisitedPages.splice(index, 1)
 
-        return newVisitedPages
-      })
+        setVisitedPages(newVisitedPages)
+      }
+
+      return newVisitedPages
     },
-    [setVisitedPages]
+    [visitedPages, setVisitedPages]
   )
 
   const providerValues = useMemo<PagesHistory>(
