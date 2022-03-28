@@ -2,16 +2,7 @@ import { CSSProperties, ReactNode } from "react"
 import styled from "styled-components"
 
 const Section = styled.section`
-  overflow-y: scroll;
-  scroll-behavior: smooth;
-
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-
-  ::-webkit-scrollbar {
-    width: 0;
-    height: 0;
-  }
+  overflow-y: auto;
 `
 
 interface ContentProps {
@@ -20,12 +11,10 @@ interface ContentProps {
   style?: CSSProperties
 }
 
-const Content = ({ children, className, style }: ContentProps) => {
-  return (
-    <Section className={className} style={style}>
-      {children}
-    </Section>
-  )
-}
+const Content = ({ children, className, style }: ContentProps) => (
+  <Section className={className} style={style}>
+    {children}
+  </Section>
+)
 
 export default Content
