@@ -73,7 +73,10 @@ const SideMenuLink = ({
 
   const [itemRef, setItemRef] = useState<HTMLLIElement | null>(null)
 
-  const addVisitedPage = useCallback(() => addPage(pageName), [pageName])
+  const addVisitedPage = useCallback(
+    () => addPage(pageName),
+    [addPage, pageName]
+  )
 
   return (
     <>
