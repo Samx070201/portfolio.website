@@ -9,10 +9,18 @@ export function useIsScrollable(ref: HTMLElement | null): boolean {
     const [shouldShow, setShouldShow] = useState(false)
 
     useEffect(() => {
-        if(ref) {
-            setShouldShow(ref.scrollHeight > ref.clientHeight)
+        const isScrollable = () => {
+            if(ref) {
+                setShouldShow(ref.scrollHeight > ref.clientHeight)
+            }
         }
-    })
+
+        isScrollable()
+
+        window.addEventListener("resize", isScrollable)
+
+        return () => window.removeEventListener("resize", isScrollable)
+    }, [ref])
 
     return ref ? shouldShow : false
 }

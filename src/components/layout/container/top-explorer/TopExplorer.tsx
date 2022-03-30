@@ -4,7 +4,7 @@ import ExplorerItem from "./TopExplorerTile"
 import { useCurrentPageName } from "@hooks"
 
 const Container = styled.div`
-  height: 2.25rem;
+  height: var(--top-explorer-height);
   display: flex;
   align-items: stretch;
   background-color: var(--top-explorer-bg-color);

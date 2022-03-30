@@ -18,11 +18,11 @@ const Paragraph = styled.code`
   font-size: 2em;
 
   :first-child {
-    margin-top: 1em;
+    padding-top: 1em;
   }
 
   :last-child {
-    margin-bottom: 1em;
+    padding-bottom: 1em;
   }
 `
 
