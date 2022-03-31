@@ -1,9 +1,7 @@
-import { AvailablePages, TopExplorerItem } from "@common/types"
+import { useState, useCallback, useContext } from "react"
+import type { AvailablePages } from "@common/types"
 import HistoryContext from "context/HistoryContext"
 import { Link } from "gatsby"
-import { useContext } from "react"
-import { useCallback } from "react"
-import { useState } from "react"
 import styled from "styled-components"
 import Popover from "../../../Popover"
 

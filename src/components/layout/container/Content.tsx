@@ -1,4 +1,5 @@
 import { useIsScrollable } from "@hooks/useIsScrollable"
+import clamp from "@utility/clamp"
 import HistoryContext from "context/HistoryContext"
 import {
   CSSProperties,
@@ -48,45 +49,73 @@ function Content({ children, className, style }: ContentProps) {
     [visitedPages]
   )
 
+  const [contentRef, setContentRef] = useState<HTMLElement | null>(null)
   const [containerRef, setContainerRef] = useState<HTMLElement | null>(null)
-  const [draggableHeight, setDraggableHeight] = useState<number | string>(0)
-  const [containerScrollTop, setContainerScrollTop] = useState<number>(0)
 
-  const isScrollable = useIsScrollable(containerRef)
+  const [draggableHeight, setDraggableHeight] = useState<number | string>(0)
+
+  const [containerScrollTop, setContainerScrollTop] = useState<number>(0)
+  const [containerScrollTopMax, setContainerScrollTopMax] = useState<number>(0)
+
+  const isScrollable = useIsScrollable(contentRef)
 
   useEffect(() => {
     const updateDraggableHeight = () => {
       setDraggableHeight(
-        containerRef
-          ? `${(containerRef.clientHeight * 100) / containerRef.scrollHeight}%`
+        contentRef
+          ? `${(contentRef.clientHeight * 100) / contentRef.scrollHeight}%`
           : 0
       )
     }
 
+    updateDraggableHeight()
+
     window.addEventListener("resize", updateDraggableHeight)
 
     return () => window.removeEventListener("resize", updateDraggableHeight)
+  }, [contentRef])
+
+  useEffect(() => {
+    if (containerRef) {
+      setContainerScrollTopMax(
+        containerRef.scrollHeight - containerRef.clientHeight
+      )
+    }
   }, [containerRef])
 
   return (
     <Wrapper
+      ref={setContainerRef}
       isScrollable={isScrollable}
       onScroll={({ target }) =>
         setContainerScrollTop((target as HTMLDivElement).scrollTop)
       }
     >
-      <section ref={setContainerRef} className={className} style={style}>
+      <section ref={setContentRef} className={className} style={style}>
         {children}
       </section>
       {isScrollable && (
         <ScrollBar
           draggableHeight={draggableHeight}
           draggableTopOffset={
-            containerRef
-              ? `${(containerScrollTop * 100) / containerRef.scrollHeight}%`
+            contentRef
+              ? `${(containerScrollTop * 100) / contentRef.scrollHeight}%`
               : 0
           }
           considerTopExplorer={isTopExplorerVisible}
+          onDrag={deltaY => {
+            if (containerRef) {
+              const newScrollTop = clamp(
+                0,
+                containerScrollTopMax,
+                containerScrollTop + deltaY
+              )
+
+              containerRef.scrollTop = newScrollTop
+
+              setContainerScrollTop(newScrollTop)
+            }
+          }}
         />
       )}
     </Wrapper>

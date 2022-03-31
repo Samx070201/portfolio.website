@@ -1,5 +1,5 @@
 import { createContext, useState, useCallback, useMemo, ReactNode } from "react"
-import { AvailablePages } from "@common/types"
+import type { AvailablePages } from "@common/types"
 
 interface PagesHistory {
   visitedPages: AvailablePages[]
