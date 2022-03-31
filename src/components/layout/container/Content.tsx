@@ -1,10 +1,21 @@
 import { useIsScrollable } from "@hooks/useIsScrollable"
 import HistoryContext from "context/HistoryContext"
-import { CSSProperties, ReactNode, useContext, useMemo, useState } from "react"
+import {
+  CSSProperties,
+  ReactNode,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react"
 import styled from "styled-components"
 import ScrollBar from "../ScrollBar"
 
-const Wrapper = styled.div`
+interface WrapperStyleProps {
+  isScrollable?: boolean
+}
+
+const Wrapper = styled.div<WrapperStyleProps>`
   display: flex;
   flex: 1;
   overflow: auto;
@@ -12,21 +23,15 @@ const Wrapper = styled.div`
   -ms-overflow-style: none;
   scrollbar-width: none;
 
+  margin-right: ${({ isScrollable }) =>
+    isScrollable
+      ? "calc(var(--scrollbar-width) + 1px)"
+      : 0}; // 1px is for the border of the scrollbar container
+
   ::-webkit-scrollbar {
     width: 0;
     height: 0;
   }
-`
-
-/**
- * Since the original scrollbar is hidden in the Wrapper,
- * we need to simulate what the w3 specification says for the
- * space taken up by the scrollbar, hence we place a ghost underneath
- * the interactable one, since we cannot perform a calc() on flex subtracting
- * the scrollbar width.
- */
-const GhostScrollbar = styled.div`
-  width: var(--scrollbar-width);
 `
 
 interface ContentProps {
@@ -44,12 +49,28 @@ function Content({ children, className, style }: ContentProps) {
   )
 
   const [containerRef, setContainerRef] = useState<HTMLElement | null>(null)
+  const [draggableHeight, setDraggableHeight] = useState<number | string>(0)
   const [containerScrollTop, setContainerScrollTop] = useState<number>(0)
 
   const isScrollable = useIsScrollable(containerRef)
 
+  useEffect(() => {
+    const updateDraggableHeight = () => {
+      setDraggableHeight(
+        containerRef
+          ? `${(containerRef.clientHeight * 100) / containerRef.scrollHeight}%`
+          : 0
+      )
+    }
+
+    window.addEventListener("resize", updateDraggableHeight)
+
+    return () => window.removeEventListener("resize", updateDraggableHeight)
+  }, [containerRef])
+
   return (
     <Wrapper
+      isScrollable={isScrollable}
       onScroll={({ target }) =>
         setContainerScrollTop((target as HTMLDivElement).scrollTop)
       }
@@ -57,16 +78,9 @@ function Content({ children, className, style }: ContentProps) {
       <section ref={setContainerRef} className={className} style={style}>
         {children}
       </section>
-      {isScrollable && <GhostScrollbar />}
       {isScrollable && (
         <ScrollBar
-          draggableHeight={
-            containerRef
-              ? `${
-                  (containerRef.clientHeight * 100) / containerRef.scrollHeight
-                }%`
-              : 0
-          }
+          draggableHeight={draggableHeight}
           draggableTopOffset={
             containerRef
               ? `${(containerScrollTop * 100) / containerRef.scrollHeight}%`

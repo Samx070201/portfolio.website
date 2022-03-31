@@ -1,6 +1,6 @@
 import { CSSProperties } from "react"
 import styled from "styled-components"
-import { AvailablePages, TopExplorerItem } from "@common/types"
+import { AvailablePages, MouseAction, TopExplorerItem } from "@common/types"
 import { Link } from "gatsby"
 
 interface ItemStyleProps {
@@ -80,16 +80,30 @@ const TopExplorerTile = ({
 
   active = false,
 }: TopExplorerTileProps) => (
-  <Item to={href} $active={active} className={className} style={style}>
+  <Item
+    to={href}
+    $active={active}
+    className={className}
+    style={style}
+    onMouseUp={e => {
+      if (e.button == MouseAction.wheelClick) {
+        onClose()
+
+        e.preventDefault()
+      }
+    }}
+  >
     <Icon color="#dd4c35">{icon}</Icon>
     <Title>{title}</Title>
     <CloseIcon
       className="iconVisibility"
       color={active ? "whitesmoke" : "var(--top-explorer-tile-close-color)"}
-      onClick={e => {
-        onClose()
+      onMouseUp={e => {
+        if (e.button == MouseAction.leftClick) {
+          onClose()
 
-        e.preventDefault()
+          e.preventDefault()
+        }
       }}
     >
       close
