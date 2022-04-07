@@ -1,6 +1,10 @@
 import { CSSProperties } from "react"
 import styled from "styled-components"
-import { AvailablePages, MouseAction, TopExplorerItem } from "@common/types"
+import {
+  AvailablePages,
+  MouseButtonEvent,
+  TopExplorerItem,
+} from "@common/types"
 import { Link } from "gatsby"
 
 interface ItemStyleProps {
@@ -86,7 +90,7 @@ const TopExplorerTile = ({
     className={className}
     style={style}
     onMouseUp={e => {
-      if (e.button == MouseAction.wheelClick) {
+      if (e.button == MouseButtonEvent.wheelClick) {
         onClose()
 
         e.preventDefault()
@@ -99,7 +103,7 @@ const TopExplorerTile = ({
       className="iconVisibility"
       color={active ? "whitesmoke" : "var(--top-explorer-tile-close-color)"}
       onMouseUp={e => {
-        if (e.button == MouseAction.leftClick) {
+        if (e.button == MouseButtonEvent.leftClick) {
           onClose()
 
           e.preventDefault()

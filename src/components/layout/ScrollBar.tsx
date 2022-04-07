@@ -1,5 +1,5 @@
-import { MouseAction } from "@common/types"
-import { useCallback, PointerEvent, useState } from "react"
+import { MouseButtonEvent, MouseButtonsEvent } from "@common/types"
+import { useCallback, PointerEvent } from "react"
 import styled from "styled-components"
 
 interface ScrollBarContainerStyleProps {
@@ -64,29 +64,17 @@ function ScrollBar({
 
   onDrag,
 }: ScrollBarProps) {
-  const [startingDeltaY, setStartingDeltaY] = useState<number>(0)
+  const onPointerDown = useCallback((event: PointerEvent<HTMLDivElement>) => {
+    const currentTarget = event.currentTarget
 
-  const onPointerDown = useCallback(
-    (event: PointerEvent<HTMLDivElement>) => {
-      const currentTarget = event.currentTarget
+    currentTarget.setPointerCapture(event.pointerId)
+  }, [])
 
-      currentTarget.setPointerCapture(event.pointerId)
+  const onPointerCancel = useCallback((event: PointerEvent<HTMLDivElement>) => {
+    const currentTarget = event.currentTarget
 
-      setStartingDeltaY(event.clientY)
-    },
-    [setStartingDeltaY]
-  )
-
-  const onPointerCancel = useCallback(
-    (event: PointerEvent<HTMLDivElement>) => {
-      const currentTarget = event.currentTarget
-
-      currentTarget.releasePointerCapture(event.pointerId)
-
-      setStartingDeltaY(0)
-    },
-    [setStartingDeltaY]
-  )
+    currentTarget.releasePointerCapture(event.pointerId)
+  }, [])
 
   return (
     <ScrollBarContainer considerTopExplorer={considerTopExplorer}>
@@ -96,7 +84,7 @@ function ScrollBar({
         onPointerDown={onPointerDown}
         onPointerCancel={onPointerCancel}
         onPointerMove={({ buttons, movementY }) => {
-          if (buttons === 1) {
+          if (buttons === MouseButtonsEvent.leftPressed) {
             onDrag(movementY)
           }
         }}
